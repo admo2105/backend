@@ -3,7 +3,6 @@ import json
 import numpy as np
 import pandas as pd
 import torch
-import torch_directml
 from sentence_transformers import SentenceTransformer, util
 from flask import Flask, request, jsonify
 
@@ -27,7 +26,6 @@ movies_df['combined_text'] = movies_df.apply(create_movie_text, axis=1)
 
 # ---------- Step 3: Load the SentenceTransformer Model on DirectML Device ----------
 print("Loading SentenceTransformer model on AMD GPU using DirectML...")
-dml_device = torch_directml.device()  # Create DirectML device
 model = SentenceTransformer('sentence-transformers/paraphrase-mpnet-base-v2')
 
 # ---------- Step 4: Compute or Load Movie Embeddings using Option 1 (Reduced Batch Size) ----------
