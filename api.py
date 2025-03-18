@@ -35,7 +35,7 @@ movie_texts = movies_df['combined_text'].tolist()
 if os.path.exists(embeddings_file):
     print("Loading precomputed embeddings...")
     # Load the numpy array and convert it to a torch tensor on the DirectML device
-    movie_embeddings = torch.tensor(np.load(embeddings_file, allow_pickle=True))
+    movie_embeddings = torch.tensor(np.load(embeddings_file, allow_pickle=True, mmap_mode='r')).to(device)
 else:
     print("Computing embeddings for each movie with reduced batch size (Option 1)...")
     movie_embeddings = model.encode(
